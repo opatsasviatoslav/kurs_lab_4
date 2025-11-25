@@ -35,7 +35,6 @@ void strcopy(char* fStr, char* sStr, size_t until)
         fStr[i] = sStr[i];
     fStr[until] = '\0';
 }
-}
 
 int32_t strcmpp(const char* fStr, const char* sStr)
 {
@@ -58,6 +57,7 @@ char* strcatt(char* fStr, const char* sStr)
     *ptr = '\0';
     return fStr;
 }
+
 bool is_string_valid(char* str)
 {
     bool isThereString = false;
