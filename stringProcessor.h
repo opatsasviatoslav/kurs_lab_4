@@ -7,22 +7,67 @@
 #include <stdio.h>
 #include "sort.h"
 #define STRING_MAX 512ull
-const int32_t get_str(const char const* msg, char* str, const int32_t limit)
+
+const int32_t get_str(const char* msg, char* str, const int32_t limit)
 {
-    //paste your solution here
+    if (!msg || !str || limit <= 0)
+        return -1;
+
+    std::fputs(msg, stdout);
+
+    if (!std::fgets(str, limit, stdin))
+        return -1;
+
+    for (int32_t i = 0; i < limit; i++) {
+        if (str[i] == '\n') {
+            str[i] = '\0';
+            break;
+        }
+        if (str[i] == '\0')
+            break;
+    }
+
+    return 0;
 }
+
 const size_t strlenn(const char* str)
 {
-    //paste your solution here
+    if (!str) return 0;
+
+    size_t n = 0;
+    while (str[n] != '\0')
+        n++;
+
+    return n;
 }
+
 void strcopy(char* fStr, char* sStr, size_t until)
 {
-    //paste your solution here
+    if (!fStr || !sStr || until == 0)
+        return;
+
+    for (size_t i = 0; i < until; i++) {
+        fStr[i] = sStr[i];
+        if (sStr[i] == '\0')
+            return;
+    }
+
+    fStr[until - 1] = '\0';
 }
+
 int32_t strcmpp(const char* fStr, const char* sStr)
 {
-    //paste your solution here
+    if (!fStr || !sStr)
+        return (fStr == sStr ? 0 : (fStr ? 1 : -1));
+
+    for (; *fStr || *sStr; fStr++, sStr++) {
+        if (*fStr != *sStr)
+            return (uint8_t)*fStr - (uint8_t)*sStr;
+    }
+
+    return 0;
 }
+
 char* strcatt(char* fStr, const char* sStr)
 {
     char* ptr = fStr + strlenn(fStr);
